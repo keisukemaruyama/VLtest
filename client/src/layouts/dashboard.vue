@@ -7,12 +7,12 @@
             <nav>
                 <ul>
                     <li>
-                        <router-link :to="{ name: 'driver_list' }">
+                        <router-link :to="{ name: 'driver_list' }" active-class="is-current">
                             ドライバー管理
                         </router-link>
                     </li>
                     <li>
-                        <router-link :to="{ name: 'vehicle_list' }">
+                        <router-link :to="{ name: 'vehicle_list' }" active-class="is-current">
                             車両管理
                         </router-link>
                     </li>
