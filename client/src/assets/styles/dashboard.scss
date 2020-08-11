@@ -1,0 +1,490 @@
+// dashboard
+
+@import 'dashboard-color';
+
+input, select, textarea {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.wrapper {
+    display: flex;
+    width: 100%;
+}
+
+.menu {
+    @include scrollbar;
+    overflow: auto;
+    width: $menu-width;
+    height: 100vh;
+    background: $menu-bgcolor;
+    color: $menu-textcolor;
+    > nav {
+        > ul {
+            border-top: 1px $sub-color solid;
+            > li {
+                > a {
+                    position: relative;
+                    display: inline-block;
+                    width: 100%;
+                    padding: $space * 3 $space * 3.5;
+                    border-bottom: 1px $sub-color solid;
+                    color: $menu-textcolor;
+                    font-size: 18px;
+                    &:hover {
+                        &::before {
+                            content: '';
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            display: block;
+                            width: 5px;
+                            height: 100%;
+                            background: $active-color;
+                        }
+                        background-color: $sub-color;
+                    }
+                    &.is-current {
+                        &::before {
+                            content: '';
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            display: block;
+                            width: 5px;
+                            height: 100%;
+                            background: $active-color;
+                        }
+                        background-color: $sub-color;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.logo {
+    width: 100%;
+    padding: $space * 4.5 $space * 3;
+    text-align: center;
+}
+
+.content {
+    overflow: auto;
+    position: relative;
+    flex: 1;
+    height: 100vh;
+    background: $content-bgcolor;
+    color: $content-textcolor;
+}
+
+.login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    background: $login-bgcolor;
+    color: $login-textcolor;
+    text-align: center;
+    &__inner {
+        width: 480px;
+        padding: 64px 32px;
+        > div {
+            &:not(:first-child) {
+                margin-top: $space * 5;
+            }
+            > img {
+                width: 80%;
+                margin-bottom: $space * 2.5;
+            }
+            > input {
+                padding: $space * 1.2;
+                font-size: 18px;
+            }
+            > a {
+                color: $login-textcolor;
+            }
+        }
+    }
+}
+
+.header {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    padding: $space;
+    background: $header-bgcolor;
+    > nav {
+        > ul {
+            display: flex;
+            justify-content: flex-end;
+            > li {
+                margin-left: 1.5em;
+                > a {
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+}
+
+.dashboard {
+    overflow: auto;
+    padding: 2%;
+    > * {
+        &:not(:first-child) {
+            margin-top: 1.25rem;
+        }
+    }
+    h1 {
+        margin-bottom: 4%;
+        font-size: $font-size-h1;
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+    h2 {
+        margin-top: 4% !important;
+        font-size: $font-size-h2;
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+    h3 {
+        margin-top: 4% !important;
+        font-size: $font-size-h3;
+        font-weight: bold;
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+    a {
+        &.arrow {
+            &::after {
+                content: ' ▶';
+            }
+        }
+    }
+    input:disabled {
+        background-color: $content-bgcolor;
+    }
+    table {
+        width: 100%;
+        line-height: 1.4;
+        tr {
+            .is-wrap {
+                white-space: normal;
+            }
+            .is-discard {
+                color: $delete-color;
+            }
+            &:hover {
+                td {
+                    background: #ffc;
+                }
+            }
+            &:first-child {
+                td {
+                    border-top: none;
+                }
+            }
+        }
+        th {
+            padding: $space $space * 1.5;
+            border-bottom: 1px #333 solid;
+            vertical-align: bottom;
+            font-weight: normal;
+            white-space: nowrap;
+        }
+        td {
+            padding: $space $space * 1.5;
+            background: #fff;
+            border-top: 1px #ddd solid;
+            vertical-align: middle;
+            white-space: nowrap;
+            img {
+                max-width: 80px;
+            }
+        }
+        input[type="checkbox"]+label {
+            margin-top: 4px;
+            margin-bottom: 4px;
+        }
+    }
+    .is-left {
+        text-align: left;
+    }
+    .is-center {
+        text-align: center;
+    }
+    .is-right {
+        text-align: right;
+    }
+    .is-error {
+        border-color: red;
+    }
+    .is-ninja {
+        input[type="text"] {
+            border: none;
+            border-radius: 0;
+        }
+        input[type="number"] {
+            border: none;
+            border-radius: 0;
+        }
+        input[type="date"] {
+            border: none;
+            border-radius: 0;
+        }
+        td {
+            padding: 0;
+            border: 1px #ddd solid;
+            border-top: none;
+        }
+    }
+    .errorMessage {
+        margin-top: $space;
+        color: red;
+        font-size: 14px;
+    }
+}
+
+@mixin button ($color) {
+    display: inline-block;
+    padding: $space $space * 1.2 $space * 0.75;
+    background-color: $color;
+    color: #fff;
+    font-size: 16px;
+    line-height: 1;
+    letter-spacing: 1px;
+    border: 1px $color solid;
+    border-radius: 4px;
+    transition: $base-anchor-transition;
+    cursor: pointer;
+    + * {
+        margin-left: $space;
+    }
+    &:hover {
+        color: #fff;
+        background-color: lighten($color, 12%);
+        border-color: lighten($color, 12%);
+    }
+}
+
+@mixin button--oval ($color) {
+    display: inline-block;
+    padding: $space * 1.75 $space * 4 $space * 1.25;
+    background-color: $color;
+    color: #fff;
+    font-size: 18px;
+    line-height: 1;
+    letter-spacing: 1px;
+    border: 1px $color solid;
+    border-radius: 999em;
+    transition: $base-anchor-transition;
+    cursor: pointer;
+    + * {
+        margin-left: 1.5em;
+    }
+    &:hover {
+        color: #fff;
+        background-color: lighten($color, 12%);
+        border-color: lighten($color, 12%);
+    }
+}
+
+@mixin button--ghost ($color) {
+    display: inline-block;
+    padding: $space $space * 1.2 $space * 0.75;
+    color: $color;
+    font-size: 16px;
+    line-height: 1;
+    letter-spacing: 1px;
+    border: 1px $color solid;
+    border-radius: 4px;
+    cursor: pointer;
+    + * {
+        margin-left: $space;
+    }
+}
+
+@mixin button--order {
+    padding-left: $space;
+    padding-right: $space;
+    font-size: 24px;
+}
+
+.button {
+    &--primary {
+        @include button ($primary-color);
+        &--plus {
+            @include button ($primary-color);
+            @include button--order;
+        }
+    }
+    &--delete {
+        @include button ($delete-color);
+        &--minus {
+            @include button ($delete-color);
+            @include button--order;
+        }
+    }
+    &--other {
+        @include button ($other-color);
+        &--favorite {
+            @include button ($other-color);
+            @include button--order;
+        }
+    }
+    &--cancel {
+        @include button ($cancel-color);
+    }
+    &--ghost {
+        @include button--ghost ($ghost-color);
+        &--favorite {
+            @include button--ghost ($ghost-color);
+            @include button--order;
+        }
+    }
+    &--oval {
+        &--primary {
+            @include button--oval ($primary-color);
+        }
+        &--delete {
+            @include button--oval ($delete-color);
+        }
+        &--cancel {
+            @include button--oval ($cancel-color);
+        }
+        &--other {
+            @include button--oval ($other-color);
+        }
+    }
+}
+
+.date {
+    position: relative;
+    top: 3px;
+    margin: 0 $space * 1.5 0 0;
+    font-size: 24px;
+}
+
+@mixin modal-base {
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+
+.modal {
+    @include modal-base;
+    z-index: 999;
+    &.show {
+        display: block;
+    }
+    &-backdrop {
+        @include modal-base;
+        background: rgba($color: #000, $alpha: .5);
+        z-index: 998;
+    }
+    &__dialog {
+        display: flex;
+        align-items: center;
+        width: 512px;
+        height: 100%;
+        margin: auto;
+    }
+    &__content {
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-top: -20%;
+        background-color: #fff;
+        border-radius: 8px;
+        opacity: 0;
+        transition: all .3s ease-out;
+        &.show {
+            margin-top: 0;
+            opacity: 1;
+        }
+        &__header {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: $space * 4;
+            background: #ccc;
+            button {
+                position: relative;
+                width: 48px;
+                height: 48px;
+                cursor: pointer;
+                &::before {
+                    content: '';
+                    position: absolute;
+                    top: 6px;
+                    left: 23px;
+                    transform: rotate(45deg);
+                    display: block;
+                    width: 2px;
+                    height: 36px;
+                    background: $cancel-color;
+                }
+                &::after {
+                    content: '';
+                    position: absolute;
+                    top: 6px;
+                    right: 23px;
+                    transform: rotate(-45deg);
+                    display: block;
+                    width: 2px;
+                    height: 36px;
+                    background: $cancel-color;
+                }
+            }
+        }
+        &__body {
+            padding: $space * 2;
+            text-align: center;
+            font-size: 21px;
+            line-height: 1.6;
+            input {
+                &:first-child {
+                    margin-bottom: $space;
+                }
+                &:last-child {
+                    margin-top: $space;
+                }
+            }
+        }
+        &__footer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: $space * 4;
+        }
+    }
+}
+
+@for $i from 0 through 10 {
+    .l-mt#{$i} {
+        margin-top: #{$i * 1%} !important;
+    }
+    .l-mr#{$i} {
+        margin-right: #{$i * 1%} !important;
+    }
+    .l-mb#{$i} {
+        margin-bottom: #{$i * 1%} !important;
+    }
+    .l-ml#{$i} {
+        margin-left: #{$i * 1%} !important;
+    }
+    .l-w#{$i} {
+        width: #{$i * 10%} !important;
+    }
+}
+
+@import 'dashboard-customize';
